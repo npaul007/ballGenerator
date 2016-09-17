@@ -62,8 +62,11 @@ window.onload = function(){
 	setTimeout(actionPerformed,25);
 
 	var ball = new ball();
-	var numberOfBalls = 20;
+	var numberOfBalls = 2;
+
 	loadObject(ball,numberOfBalls);
+
+	var colors = ['blue','green','red','orange','yellow','purple','pink','white'];
 
 	function loadObject(ball,numberOfBalls){
 		for(var g=0; g<numberOfBalls; g++){
@@ -91,12 +94,12 @@ window.onload = function(){
 	}
 
 	document.getElementById('plus').onclick=function(){
-		numberOfBalls+=10;
+		numberOfBalls+=5;
 		loadObject(ball,numberOfBalls);
 	}
 
 	document.getElementById('minus').onclick=function(){
-		numberOfBalls-=2;
+		numberOfBalls-=5;
 		loadObject(ball,numberOfBalls);
 	}
 
@@ -107,10 +110,14 @@ window.onload = function(){
 
 		clearCanvas(ctx);
 
-		setColor(ctx,"white");
-
+		var cLength = colors.length;
+		var c = 0;
 		for(var i = 0; i<numberOfBalls; i++){
+			if(c>cLength)
+				c = 0;
+			setColor(ctx,colors[c]);
 			drawCircle(ctx,ball.x[i],ball.y[i],ball.r[i]);
+			c++;
 		}
 
 		ball.animate();
